@@ -1,0 +1,67 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+android_app {
+    name: "Gallery2",
+
+    static_libs: [
+        "androidx.fragment_fragment",
+        "androidx.legacy_legacy-support-core-ui",
+        "androidx.core_core",
+        "androidx.legacy_legacy-support-v13",
+        "com.android.gallery3d.common2",
+        "xmp_toolkit",
+        "mp4parser",
+        "androidx-constraintlayout_constraintlayout",
+        "gson",
+        "android-support-v7-recyclerview",
+        "androidx.recyclerview_recyclerview",
+        "androidx.exifinterface_exifinterface",
+    ],
+
+    srcs: [
+        "src/**/*.java",
+        "src_pd/**/*.java",
+        "src/**/*.kt",
+    ],
+
+    resource_dirs: ["res"],
+
+    overrides: [
+        "Gallery",
+        "Gallery3D",
+        "GalleryNew3D",
+    ],
+
+    use_embedded_native_libs: true,
+    system_ext_specific: true,
+    platform_apis: true,
+
+    target_sdk_version: "33",
+
+    jni_libs: [
+        "libjni_eglfence",
+        "libjni_filtershow_filters",
+        "libjni_jpegstream",
+        "libjni_c2pautil",
+    ],
+
+    optimize: {
+        keep_runtime_invisible_annotations: true,
+        proguard_flags_files: ["proguard.flags"],
+    },
+
+    libs: [
+        "org.apache.http.legacy.stubs",
+        "vendor.qti.hardware.c2pa-V1-java",
+    ],
+
+    optional_uses_libs: [
+        "com.google.android.media.effects",
+        "org.apache.http.legacy",
+    ],
+
+    jarjar_rules: "jarjar-rules.txt",
+    privileged: true,
+}
